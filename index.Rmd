@@ -130,7 +130,7 @@ The accuracy of this model is too low, so next I will try a random forest model.
 
 A random forest algorithm will automatically select the most important variables.
 
-This model will using randomForest on the training data,  crossvalidate the model on the validation data, and then estimate the accuracy using confusionMatrix.
+This model will use randomForest on the training data,  crossvalidate the model on the validation data, and then estimate the accuracy using confusionMatrix.
 
 ```{r}
 modFit2 <- randomForest(classe ~ ., data=mytrain)
