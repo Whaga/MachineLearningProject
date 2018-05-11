@@ -63,6 +63,8 @@ The original data set has 19622 rows and 160 variables
 
 # Clean The Data
 
+Cleaning the data set includes removing columns with more than 50% missing values, removing columns with little variablility, and setting the level of factor variables in the testing data set equal to the levels in the training data set.
+
 ```r
 # Remove first column which is just an index
 
@@ -109,18 +111,34 @@ for (p in common) {
 
 # Split the Training Data Set
 
+The cleaned data set will next be split into a training data set (mytrain) containing 60% of the data and a validation data set (mytest). The mytest data set will be used for cross validation of the prediction models.
+
+
 ```r
 set.seed(13579)  #set seed for reprodicibility
 inTrain <- createDataPartition(training$classe, p=0.60, list=FALSE)
 mytrain <- training[inTrain, ]
 mytest <- training[-inTrain, ]
+dim(mytrain)
+```
+
+```
+## [1] 11776    58
+```
+
+```r
+dim(mytest)
+```
+
+```
+## [1] 7846   58
 ```
 
 # Prediction Models
 
 ### Tree Prediction
 
-I will first try a simple tree prediction model.
+I will first try a simple tree prediction model using rpart on the training data, display the prediction tree with fancyRpartPlot, crossvalidate the model on the validation data, and then estimate the accuracy using confusionMatrix.
 
 
 ```r
@@ -176,6 +194,10 @@ The accuracy of this model is too low, so next I will try a random forest model.
 
 ### Random Forest Prediction
 
+A random forest algorithm will automatically select the most important variables.
+
+This model will using randomForest on the training data,  crossvalidate the model on the validation data, and then estimate the accuracy using confusionMatrix.
+
 
 ```r
 modFit2 <- randomForest(classe ~ ., data=mytrain)
@@ -220,9 +242,11 @@ conrf
 
 The estimated accuracy of the prediction for this model is 0.999%. The estimated out-of-sample error is 0.102%.
 
-As the random forest prediction accuracy is very high, no further models will be examined.
+As the random forest prediction accuracy is very high, no further models need to be examined.
 
 # Prediction for the Test Data Set
+
+Finally the random forest model will be applied to the 20 test data observations.
 
 
 ```r
