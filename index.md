@@ -170,11 +170,6 @@ contree
 ## Balanced Accuracy      0.9764   0.8973   0.9177   0.8409   0.9391
 ```
 
-```r
-##accuracy <- contree$overall["Accuracy"]
-##accuracy
-```
-
 The estimated accuracy of the prediction for this model is 87.28%. The estimated out-of-sample error is 12.72%.  
 
 The accuracy of this model is too low, so next I will try a random forest model.

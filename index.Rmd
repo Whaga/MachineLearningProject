@@ -113,8 +113,6 @@ fancyRpartPlot(modFit1)
 predictions1 <- predict(modFit1, mytest, type = "class")
 contree <- confusionMatrix(predictions1, mytest$classe)
 contree
-##accuracy <- contree$overall["Accuracy"]
-##accuracy
 ```
 
 The estimated accuracy of the prediction for this model is `r paste0(round(contree$overall["Accuracy"] * 100, 3), "%")`. The estimated out-of-sample error is `r paste0(round(100 - contree$overall["Accuracy"] * 100, 3), "%")`.  
